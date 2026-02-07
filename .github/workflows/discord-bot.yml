@@ -1,0 +1,36 @@
+name: Discord Trading Journal Bot
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    # 保持 bot 持续运行
+    # 注意：GitHub Actions 有超时限制，最多运行 6 小时
+    # 如果需要 24/7 运行，建议使用其他平台（如 Render、Railway）
+    timeout-minutes: 360
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Discord Bot
+      env:
+        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        GH_PAT: ${{ secrets.GH_PAT }}
+        REPO_NAME: ${{ secrets.REPO_NAME }}
+      run: python bot.py
