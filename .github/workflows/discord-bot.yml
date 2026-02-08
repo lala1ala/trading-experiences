@@ -4,9 +4,9 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
-  # 定时触发：每天 UTC 10:30 = 北京时间 18:30
+  # 定时触发：每天 UTC 13:00 = 北京时间 21:00
   schedule:
-    - cron: '30 10 * * *'
+    - cron: '0 13 * * *'
 
 jobs:
   run-bot:

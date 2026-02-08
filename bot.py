@@ -120,15 +120,15 @@ def search_issues(query, labels=None):
 async def on_ready():
     print(f'✅ Bot 已启动: {bot.user}')
     print(f'📦 连接到仓库: {REPO_NAME}')
-    print(f'⏰ 将在 5.5 小时后自动停止 (北京时间 24:00)')
+    print(f'⏰ 将在 3 小时后自动停止 (北京时间 24:00)')
 
-    # 启动自动停止任务（5.5 小时 = 330 分钟）
+    # 启动自动停止任务（3 小时 = 180 分钟）
     await stop_after_duration()
 
 
 async def stop_after_duration():
-    """运行 5.5 小时后自动停止"""
-    await asyncio.sleep(330 * 60)  # 330 分钟 * 60 秒
+    """运行 3 小时后自动停止"""
+    await asyncio.sleep(180 * 60)  # 180 分钟 * 60 秒
     print('⏰ 时间到，Bot 正在停止...')
     await bot.close()
 
